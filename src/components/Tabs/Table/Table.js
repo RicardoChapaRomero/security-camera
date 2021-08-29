@@ -4,6 +4,7 @@ import { Col, Container, Row, Modal, Button } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import { ChevronDown, ChevronUp } from "heroicons-react";
+import { Avatar } from '@material-ui/core';
 
 function MyVerticallyCenteredModal(props) {
   return (
@@ -36,7 +37,11 @@ function UserTable() {
   const [selectedName, setselectedName] = useState("Pepe");
 
   const [modalShow, setModalShow] = React.useState(false);
-  
+  const ImageFormatter = (cell, row) => {
+    return (
+      <Avatar alt={row.name} src={cell} />
+    );
+  };
     const columns = [{
       dataField: 'azure_id',
       text: 'Id',
@@ -89,7 +94,8 @@ function UserTable() {
     }, {
         dataField: 'image',
         text: 'Image',
-        sort: false
+        sort: false,
+        formatter: ImageFormatter
     }];
       
       const kMockData = [
@@ -99,7 +105,8 @@ function UserTable() {
           "name": 'Jamir',
           "alert": true,
           "registered_timestamp": "15/08/2021",
-          "latest_timestamp": "28/08/2021"
+          "latest_timestamp": "28/08/2021",
+          "image": "http://security-system-vision.ngrok.io/faces/77f31401-5bf5-4261-bb22-0df51ef84a1d.jpg"
         },
         {
           "id": 2,
@@ -107,7 +114,8 @@ function UserTable() {
           "name": 'Zeta',
           "alert": true,
           "registered_timestamp": "15/08/2021",
-          "latest_timestamp": "27/08/2020"
+          "latest_timestamp": "27/08/2020",
+          "image": "http://security-system-vision.ngrok.io/faces/77f31401-5bf5-4261-bb22-0df51ef84a1d.jpg"
         },
         {
           "id": 3,
@@ -115,7 +123,8 @@ function UserTable() {
           "name": 'Chapa',
           "alert": false,
           "registered_timestamp": "15/08/2021",
-          "latest_timestamp": "27/08/2019"
+          "latest_timestamp": "27/08/2019",
+          "image": "http://security-system-vision.ngrok.io/faces/77f31401-5bf5-4261-bb22-0df51ef84a1d.jpg"
         }
       ];
       const selectRow = {
@@ -147,7 +156,7 @@ function UserTable() {
             <Container fluid>
               <Row>
                 <div className='dashboard-container'>
-                <h2 className='text-center'> Dashboard with the latest data </h2>
+                <h2 className='text-center'> Record History </h2>
                 </div>
               </Row>
               <Row>
