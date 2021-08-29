@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Modal, Button } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { ChevronDown, ChevronUp } from "heroicons-react";
@@ -7,9 +7,37 @@ import { ChevronDown, ChevronUp } from "heroicons-react";
 /** This class handles the latest data retrieved from the camera detections
  * TODO(any): Define what data is going to be shown in the UI.
  */
+ function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modal heading
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Centered Modal</h4>
+        <p>
+          {"Azure ID: " + props.azure_id}
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 function Dashboard() {
 
   const [selectedAzureId, setSelectedAzureId] = useState(-1);
+  const [modalShow, setModalShow] = React.useState(false);
+
   const columns = [{
     dataField: 'name',
     text: 'Name',
@@ -77,8 +105,19 @@ function Dashboard() {
         return { backgroundColor };
       }
     };
+    const rowEvents = {
+      onClick: (e, row, rowIndex) => {
+        setSelectedAzureId(row.azure_id);
+        setModalShow(true);
+      }
+    };
       return(
         <Col sm={5} className='data-wrapper d-flex justify-content-center pt-5'>
+          <MyVerticallyCenteredModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            azure_id= {selectedAzureId}
+          />
           <Container>
             <Row>
               <div className='dashboard-container'>
@@ -87,7 +126,7 @@ function Dashboard() {
             </Row>
             <Row>
               <div className='info-table-wrapper'>
-              <BootstrapTable keyField='id' data={ kMockData } columns={ columns } selectRow = {selectRow}/>
+              <BootstrapTable keyField='id' data={ kMockData } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents}/>
               </div>
             </Row>
           </Container>

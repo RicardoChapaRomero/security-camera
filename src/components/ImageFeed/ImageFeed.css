@@ -1,0 +1,14 @@
+
+.top-right {
+      position: absolute;
+      top: 8px;
+      right: 26px;
+      background-color: red;
+      color: white;
+      width: 10%;
+}
+.live-container {
+      position: relative;
+      text-align: center;
+      width: 100%;
+}
