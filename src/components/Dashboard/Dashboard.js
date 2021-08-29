@@ -11,7 +11,7 @@ import { ChevronDown, ChevronUp } from "heroicons-react";
   return (
     <Modal
       {...props}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -20,14 +20,15 @@ import { ChevronDown, ChevronUp } from "heroicons-react";
         {props.name}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p>
-          {"Azure ID: " + props.azure_id}
-        </p>
+      <Modal.Body clas>
         <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com"/>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Button onClick={props.onHide} variant="light">Close</Button>
+        <Button onClick={() => {
+          //handle Add Alarm
+          props.onHide();
+        }} variant="danger">Add Alarm</Button>
       </Modal.Footer>
     </Modal>
   );
