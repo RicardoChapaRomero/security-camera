@@ -5,7 +5,6 @@ import './ImageFeed.css';
 /** This class handles to post the live feed from the camera. */
 function ImageFeed() {
   const [sliderValue, setSliderValue] = useState(100); 
-
   const handleSliderChange = (event, newValue) => {
     setSliderValue(newValue);
   }
@@ -17,17 +16,15 @@ function ImageFeed() {
           </Row>
           <Row>
             <div className='live-container'>
-              <img src='https://mdbcdn.b-cdn.net/img/new/slides/041.jpg' className='rounded img-fluid shadow-4 border border-dark' alt='...' />
-              <div className="top-right"> En Directo </div>
+              <img src={true ? 'https://mdbcdn.b-cdn.net/img/new/slides/041.jpg' : 'http://security-system-vision.ngrok.io/camara?deltaDays=0&deltaHours=0&deltaMinutes=0&deltaSeconds=' + (100 - sliderValue).toString()}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
+              <div onClick = {() => {setSliderValue(100)}}style={{backgroundColor : sliderValue === 100 ? "red" : "grey"}} className="top-right "> En Directo </div>
               <Slider
                 value={sliderValue}
                 onChange={handleSliderChange}
                 color="secondary"
+                className="slider"
               />
             </div>
-          </Row>
-          <Row>
-            <h3 className='video-time-stamp text-center'>28/08/2021 19:34:20</h3>
           </Row>
         </Container>
       </Col>
