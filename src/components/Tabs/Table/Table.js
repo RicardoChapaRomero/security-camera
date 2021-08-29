@@ -60,22 +60,6 @@ function UserTable() {
       return null;
       }
     }, {
-      dataField: 'alert',
-      text: 'Alert',
-      sort: false,  
-    }, {
-      dataField: 'registered_timestamp',
-      text: 'Registered',
-      filter: textFilter(),
-      sort: true,
-      sortCaret: (order, column) => {
-        if (!order) return <ChevronDown/>;
-      else if (order === 'asc') return <ChevronUp/>;
-      else if (order === 'desc') return <ChevronDown/>;
-      return null;
-      }
-  
-    }, {
       dataField: 'latest_timestamp',
       text: 'Latest timestamp',
       filter: textFilter(),
