@@ -3,11 +3,12 @@
       position: absolute;
       top: 8px;
       right: 26px;
-      background-color: red;
-      color: white;
       width: 10%;
       border-radius: 25px;
+      cursor: pointer;
+      color: white;
 }
+
 .live-container {
       position: relative;
       text-align: center;
