@@ -35,7 +35,7 @@ function App () {
       <>
         <div className = 'app-container'>
           <Router>
-          <NavBar/>
+            <NavBar/>
             <Route
               exact path='/Dashboard'
               component = { () => <TabDashboard/>  }
