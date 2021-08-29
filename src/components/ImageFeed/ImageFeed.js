@@ -16,7 +16,7 @@ function ImageFeed() {
           </Row>
           <Row>
             <div className='live-container'>
-              <img src={true ? 'https://mdbcdn.b-cdn.net/img/new/slides/041.jpg' : 'http://security-system-vision.ngrok.io/camara?deltaDays=0&deltaHours=0&deltaMinutes=0&deltaSeconds=' + (100 - sliderValue).toString()}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
+              <img src={"http://security-system-vision.ngrok.io/camara?deltaDays=0&deltaHours=0&deltaMinutes=0&deltaSeconds=" + (100 - sliderValue).toString() + "&deltaFPS=-10"}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
               <div onClick = {() => {setSliderValue(100)}}style={{backgroundColor : sliderValue === 100 ? "red" : "grey"}} className="top-right "> En Directo </div>
               <Slider
                 value={sliderValue}

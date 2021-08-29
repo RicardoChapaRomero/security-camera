@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: 0,
+  timestampFilter: undefined,
 };
 
 const homeSlice = createSlice({
@@ -16,8 +17,11 @@ const homeSlice = createSlice({
     amountAdded(state, action) {
       state.value += action.payload;
     },
+    updateTimestampFilter(state, action){
+      state.timestampFilter = action.payload;
+    }
   },
 });
 
-export const { increment, amountAdded } = homeSlice.actions;
+export const { increment, amountAdded, updateTimestampFilter } = homeSlice.actions;
 export default homeSlice.reducer;
