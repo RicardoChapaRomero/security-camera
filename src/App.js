@@ -10,9 +10,14 @@ class App extends Component {
   render() {
     return(
       <>
-        <NavBar/>
         <div className = 'app-container'>
           <Container fluid>
+          <NavBar/>
+            <Row className='justify-content-center text-center'>
+              <div className='page-title'>
+                <h1 className='mb-3'>Welcome to SafeCam</h1>
+              </div>
+            </Row>
             <Row className='data-view-wrapper'>
               <ImageFeed/>
               <Dashboard/>

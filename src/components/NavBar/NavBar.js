@@ -5,7 +5,7 @@ class NavBar extends Component {
     render() {
         return(
             <Row>
-                <Navbar bg='primary' variant='dark' fixed='top' className='page-navbar' expand='lg'>
+                <Navbar className='page-navbar' expand='lg'>
                         <Navbar.Brand href="#home">SafeCam</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
