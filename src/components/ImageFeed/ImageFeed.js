@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Slider from '@material-ui/core/Slider';
-import 'react-rangeslider/lib/index.css'
 import './ImageFeed.css';
 /** This class handles to post the live feed from the camera. */
 function ImageFeed() {
