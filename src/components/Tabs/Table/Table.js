@@ -59,6 +59,18 @@ function UserTable() {
       <Avatar alt={row.name} src={cell} />
     );
   };
+
+  const TimeStampFormatter = (cell, row) => {
+    const timestampFilter = undefined;
+    const today = new Date();
+    const deltaSeconds = timestampFilter ? Math.floor((today - timestampFilter)/1000) : 0;
+    const deltaMinutes = timestampFilter ? Math.floor(deltaSeconds/60) : 0;
+    const deltaHours = timestampFilter ? Math.floor(deltaMinutes/60) : 0;
+    const deltaDays = timestampFilter ? Math.floor(deltaHours/24) : 0;  
+    return (
+      <a href={`/Cameras?days=${deltaDays}&hours=${deltaHours}&min=${deltaMinutes}&sec=${deltaSeconds}`}> {timestampFilter}</a>
+    );
+  }
     const columns = [{
       dataField: 'azure_id',
       text: 'Id',
@@ -84,14 +96,7 @@ function UserTable() {
     }, {
       dataField: 'latest_timestamp',
       text: 'Latest timestamp',
-      filter: textFilter(),
-      sort: true,
-      sortCaret: (order, column) => {
-        if (!order) return <ChevronDown/>;
-      else if (order === 'asc') return <ChevronUp/>;
-      else if (order === 'desc') return <ChevronDown/>;
-      return null;
-      }
+      formatter: TimeStampFormatter
     }, {
         dataField: 'image',
         text: 'Image',
