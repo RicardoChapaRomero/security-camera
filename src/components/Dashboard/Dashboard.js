@@ -17,14 +17,14 @@ import { ChevronDown, ChevronUp } from "heroicons-react";
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+        {props.name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
         <p>
           {"Azure ID: " + props.azure_id}
         </p>
+        <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com"/>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -36,6 +36,8 @@ import { ChevronDown, ChevronUp } from "heroicons-react";
 function Dashboard() {
 
   const [selectedAzureId, setSelectedAzureId] = useState(-1);
+  const [selectedName, setselectedName] = useState("Pepe");
+
   const [modalShow, setModalShow] = React.useState(false);
 
   const columns = [{
@@ -102,12 +104,14 @@ function Dashboard() {
       style: (row, rowIndex) => {
         const backgroundColor = '#00BFFF';
         setSelectedAzureId(row.azure_id);
+        setselectedName(row.name);
         return { backgroundColor };
       }
     };
     const rowEvents = {
       onClick: (e, row, rowIndex) => {
         setSelectedAzureId(row.azure_id);
+        setselectedName(row.name);
         setModalShow(true);
       }
     };
@@ -117,6 +121,7 @@ function Dashboard() {
             show={modalShow}
             onHide={() => setModalShow(false)}
             azure_id= {selectedAzureId}
+            name={selectedName}
           />
           <Container>
             <Row>
@@ -126,7 +131,7 @@ function Dashboard() {
             </Row>
             <Row>
               <div className='info-table-wrapper'>
-              <BootstrapTable keyField='id' data={ kMockData } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents}/>
+              <BootstrapTable keyField='id' data={ kMockData } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents} striped hover condensed/>
               </div>
             </Row>
           </Container>
