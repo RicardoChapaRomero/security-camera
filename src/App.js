@@ -20,8 +20,7 @@ function App () {
   useEffect(() => {
     if(isLoading){
       setQueryStatus("Loading...");
-    }
-    if(isError){
+    } else if(isError){
       setQueryStatus("Error");
     }else if(isSuccess){
       setQueryStatus("Success");
