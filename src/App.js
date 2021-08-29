@@ -9,14 +9,18 @@ import {useSelector, useDispatch} from 'react-redux';
 import { increment, amountAdded} from './reducers/home';
 import { useGetAllRecordsQuery } from './services/record';
 
+const millisecondsPerMinute = 60000;
+const minutesToAutoFetch = 1;
 function App () {
   const myValue = useSelector((state) => state.home.value);
   const dispatch = useDispatch();
-  const { data, isLoading, isFetching, isError, isSuccess } = useGetAllRecordsQuery();
-  const [queryStatus, setQueryStatus] = useState("Loading");
+  const { data, isLoading, isFetching, isError, isSuccess} = useGetAllRecordsQuery(undefined, {pollingInterval: millisecondsPerMinute * minutesToAutoFetch});
+  const [queryStatus, setQueryStatus] = useState("Loading...");
 
   useEffect(() => {
-
+    if(isLoading){
+      setQueryStatus("Loading...");
+    }
     if(isError){
       setQueryStatus("Error");
     }else if(isSuccess){
