@@ -1,13 +1,41 @@
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Modal, Button } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import { ChevronDown, ChevronUp } from "heroicons-react";
 
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+        {props.name}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          {"Azure ID: " + props.azure_id}
+        </p>
+        <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com"/>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 function UserTable() {
-    const [selectedAzureId, setSelectedAzureId] = useState(-1);
-    const [modalShow, setModalShow] = React.useState(false);
+  const [selectedAzureId, setSelectedAzureId] = useState(-1);
+  const [selectedName, setselectedName] = useState("Pepe");
+
+  const [modalShow, setModalShow] = React.useState(false);
   
     const columns = [{
       dataField: 'azure_id',
@@ -97,17 +125,25 @@ function UserTable() {
         style: (row, rowIndex) => {
           const backgroundColor = '#00BFFF';
           setSelectedAzureId(row.azure_id);
+          setselectedName(row.name);
           return { backgroundColor };
         }
       };
       const rowEvents = {
         onClick: (e, row, rowIndex) => {
           setSelectedAzureId(row.azure_id);
+          setselectedName(row.name);
           setModalShow(true);
         }
       };
         return(
           <Col className='data-wrapper d-flex justify-content-center pt-5'>
+            <MyVerticallyCenteredModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              azure_id= {selectedAzureId}
+              name={selectedName}
+            />
             <Container fluid>
               <Row>
                 <div className='dashboard-container'>

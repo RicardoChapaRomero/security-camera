@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 import UserTable from './Table/Table';
 
 class TabDashboard extends Component {
