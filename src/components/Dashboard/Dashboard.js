@@ -4,6 +4,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { ChevronDown, ChevronUp } from "heroicons-react";
 import { useGetTopDataQuery } from '../../services/record';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 
 
 const millisecondsPerMinute = 60000;
@@ -38,6 +39,33 @@ const minutesToAutoFetch = 1;
   );
 }
 
+class QualityRanger extends React.Component {
+
+  getValue() {
+    return this.range.value;
+  }
+  render() {
+    const { value, onUpdate, ...rest } = this.props;
+    return [
+      <input
+        { ...rest }
+        key="range"
+        ref={ node => this.range = node }
+        type="range"
+        min="0"
+        max="100"
+      />,
+      <button
+        key="submit"
+        className="btn btn-default"
+        onClick={ () => onUpdate(this.getValue()) }
+      >
+        done
+      </button>
+    ];
+  }
+}
+
 function Dashboard() {
 
   const [selectedAzureId, setSelectedAzureId] = useState(-1);
@@ -68,7 +96,10 @@ function Dashboard() {
     else if (order === 'asc') return <ChevronUp/>;
     else if (order === 'desc') return <ChevronDown/>;
     return null;
-    }
+    },
+    editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
+      <QualityRanger { ...editorProps } value={ value } />
+    )
   }, {
     dataField: 'appearances',
     text: 'Appearances',
@@ -161,7 +192,7 @@ function Dashboard() {
             </Row>
             <Row>
               <div className='info-table-wrapper'>
-              <BootstrapTable keyField='id' data={ rows } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents} striped hover condensed/>
+              <BootstrapTable cellEdit={ cellEditFactory({ mode: 'click' }) } keyField='id' data={ rows } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents} striped hover condensed/>
               </div>
             </Row>
           </Container>
