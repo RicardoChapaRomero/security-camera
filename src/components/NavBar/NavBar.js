@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class NavBar extends Component {
     render() {
         return(
-            <Row>
+            <Row style={{ margin: 0}}>
                 <Navbar className='page-navbar' expand='lg'>
                         <Navbar.Brand as={ Link } to='/'>SafeCam</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
