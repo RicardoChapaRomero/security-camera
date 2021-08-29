@@ -14,3 +14,12 @@
       text-align: center;
       width: 100%;
 }
+
+.slider{
+      display: block !important;
+      position: absolute !important;
+      width: 97% !important;
+      bottom: 5px;
+      margin: auto;
+      background-color: rgb(0,0,0,0.5);
+}

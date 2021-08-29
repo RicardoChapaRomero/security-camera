@@ -23,6 +23,7 @@ function ImageFeed() {
                 value={sliderValue}
                 onChange={handleSliderChange}
                 color="secondary"
+                className="slider"
               />
             </div>
           </Row>
