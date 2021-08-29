@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit'
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { recordApi } from './services/record'
+import { dashboardApi } from './services/dashboardData'
+
 import homeReducer from './reducers/home'
 
 export const store = configureStore({
@@ -9,6 +11,7 @@ export const store = configureStore({
         home: homeReducer,
     // Add the generated reducer as a specific top-level slice
     [recordApi.reducerPath]: recordApi.reducer,
+    [dashboardApi.reducerPath]: dashboardApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

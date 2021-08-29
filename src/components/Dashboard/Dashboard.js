@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Container, Row, Modal, Button } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { ChevronDown, ChevronUp } from "heroicons-react";
+import { useGetTopDataQuery } from '../../services/record';
 
+
+const millisecondsPerMinute = 60000;
+const minutesToAutoFetch = 1;
 /** This class handles the latest data retrieved from the camera detections
  * TODO(any): Define what data is going to be shown in the UI.
  */
@@ -38,8 +42,22 @@ function Dashboard() {
 
   const [selectedAzureId, setSelectedAzureId] = useState(-1);
   const [selectedName, setselectedName] = useState("Pepe");
-
+  const { data, isLoading, isFetching, isError, isSuccess} = useGetTopDataQuery(undefined, {pollingInterval: millisecondsPerMinute * minutesToAutoFetch});
   const [modalShow, setModalShow] = React.useState(false);
+  const [queryStatus, setQueryStatus] = useState("Loading...");
+
+  useEffect(() => {
+    console.log(data);
+    console.log(isSuccess);
+    if(isLoading){
+      setQueryStatus("Loading...");
+    } else if(isError){
+      setQueryStatus("Error");
+    }else if(isSuccess){
+      setQueryStatus("Success");
+    }
+    console.log(queryStatus);
+  }, [isLoading, isFetching, data, isSuccess, isError])
 
   const columns = [{
     dataField: 'name',
@@ -98,6 +116,17 @@ function Dashboard() {
         "latest_timestamp": "27/08/2019"
       }
     ];
+    let rows = [];
+    data?.data.forEach((singleData, index )=> {
+      rows.push( {
+        "id": index,
+        "azure_id": singleData.id_azure,
+        "name": singleData.name,
+        "appearances": singleData.appearances,
+        "latest_timestamp": singleData.last_seen,
+      });
+    })
+
     const selectRow = {
       mode: 'radio',
       clickToSelect: true,
@@ -132,7 +161,7 @@ function Dashboard() {
             </Row>
             <Row>
               <div className='info-table-wrapper'>
-              <BootstrapTable keyField='id' data={ kMockData } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents} striped hover condensed/>
+              <BootstrapTable keyField='id' data={ rows } columns={ columns } selectRow = {selectRow} rowEvents={rowEvents} striped hover condensed/>
               </div>
             </Row>
           </Container>
