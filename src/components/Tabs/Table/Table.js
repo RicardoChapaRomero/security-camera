@@ -1,7 +1,8 @@
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import { ChevronDown, ChevronUp } from "heroicons-react";
 
 function UserTable() {
@@ -11,6 +12,7 @@ function UserTable() {
     const columns = [{
       dataField: 'azure_id',
       text: 'Id',
+      filter: textFilter(),
       sort: true,
       sortCaret: (order, column) => {
           if (!order) return <ChevronDown/>;
@@ -21,6 +23,7 @@ function UserTable() {
     }, {
       dataField: 'name',
       text: 'Name',
+      filter: textFilter(),
       sort: true,
       sortCaret: (order, column) => {
         if (!order) return <ChevronDown/>;
@@ -35,6 +38,7 @@ function UserTable() {
     }, {
       dataField: 'registered_timestamp',
       text: 'Registered',
+      filter: textFilter(),
       sort: true,
       sortCaret: (order, column) => {
         if (!order) return <ChevronDown/>;
@@ -46,6 +50,7 @@ function UserTable() {
     }, {
       dataField: 'latest_timestamp',
       text: 'Latest timestamp',
+      filter: textFilter(),
       sort: true,
       sortCaret: (order, column) => {
         if (!order) return <ChevronDown/>;
@@ -78,7 +83,7 @@ function UserTable() {
         },
         {
           "id": 3,
-          "azure_id": 23434,
+          "azure_id": 213434,
           "name": 'Chapa',
           "alert": false,
           "registered_timestamp": "15/08/2021",
@@ -115,7 +120,8 @@ function UserTable() {
                    data={ kMockData } 
                    columns={ columns } 
                    selectRow = {selectRow} 
-                   rowEvents={rowEvents}/>
+                   rowEvents={rowEvents}
+                   filter={ filterFactory() }/>
                 </div>
               </Row>
             </Container>
