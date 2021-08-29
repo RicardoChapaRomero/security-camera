@@ -121,7 +121,8 @@ function UserTable() {
                    columns={ columns } 
                    selectRow = {selectRow} 
                    rowEvents={rowEvents}
-                   filter={ filterFactory() }/>
+                   filter={ filterFactory() }
+                   striped hover condensed/>
                 </div>
               </Row>
             </Container>
