@@ -60,15 +60,32 @@ function UserTable() {
     );
   };
 
-  const TimeStampFormatter = (cell, row) => {
-    const timestampFilter = undefined;
+  const getDate = (timestamp) => {
+    timestamp.replace("Z", "");
+
+    const date = timestamp.split("T")[0];
+    const year = date.split("-")[0];
+    const month = date.split("-")[1];
+    const day = date.split("-")[2];
+
+    const date2 = timestamp.split("T")[1].split(".")[0];
+
+    const hours = date2.split(":")[0];
+    const minutes = date2.split(":")[1];
+    const seconds = date2.split(":")[2];
+
+    return new Date(year, month - 1, day, hours, minutes, seconds);
+
+  }
+   const TimeStampFormatter = (cell, row) => {
+    const timestampFilter = getDate(row.latest_timestamp);
     const today = new Date();
-    const deltaSeconds = timestampFilter ? Math.floor((today - timestampFilter)/1000) : 0;
+    const deltaSeconds = timestampFilter ? Math.floor((timestampFilter - today)/1000) : 0;
     const deltaMinutes = timestampFilter ? Math.floor(deltaSeconds/60) : 0;
     const deltaHours = timestampFilter ? Math.floor(deltaMinutes/60) : 0;
     const deltaDays = timestampFilter ? Math.floor(deltaHours/24) : 0;  
     return (
-      <a href={`/Cameras?days=${deltaDays}&hours=${deltaHours}&min=${deltaMinutes}&sec=${deltaSeconds}`}> {timestampFilter}</a>
+      <a href={`/Cameras?days=${deltaDays}&hours=${deltaHours}&min=${deltaMinutes}&sec=${deltaSeconds}`}> {timestampFilter.toLocaleString()}</a>
     );
   }
     const columns = [{

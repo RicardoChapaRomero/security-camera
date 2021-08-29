@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
 import Slider from '@material-ui/core/Slider';
 import './Tab-Cameras.css';
-import { useSelector } from 'react-redux';
 
 function TabCameras () {
   const [sliderValue, setSliderValue] = useState(100); 
-  const timestampFilter = useSelector((state) => state.home.timestampFilter);
-  const today = new Date();
-  const deltaSeconds = timestampFilter ? Math.floor((today - timestampFilter)/1000) : 0;
-  const deltaMinutes = timestampFilter ? Math.floor(deltaSeconds/60) : 0;
-  const deltaHours = timestampFilter ? Math.floor(deltaMinutes/60) : 0;
-  const deltaDays = timestampFilter ? Math.floor(deltaHours/24) : 0;
+  const [queryString, setQueryString] = useState(window.location.search);
+  const urlParams = new URLSearchParams(queryString);
+  const deltaMinutes = urlParams.has("min") ? urlParams.get('min') : "0";
 
   const handleSliderChange = (event, newValue) => {
     setSliderValue(newValue);
@@ -24,8 +20,8 @@ function TabCameras () {
         </Row>
         <Row>
           <div className='live-container'>
-          <img src={`http://security-system-vision.ngrok.io/camara?deltaDays=${deltaDays}&deltaHours=${deltaHours}&deltaMinutes=${sliderValue === 100 ? deltaMinutes : (100 - sliderValue)}&deltaSeconds=${deltaSeconds} &deltaFPS=-10`}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
-            <div onClick = {() => {setSliderValue(100)}}style={{backgroundColor : sliderValue === 100 ? "red" : "grey"}} className="top-right "> En Directo </div>
+          <img src={`http://security-system-vision.ngrok.io/camara?deltaDays=${urlParams.has('days') ? urlParams.get('days') : "0"}&deltaHours=${urlParams.has("hours") ? urlParams.get('hours') : "0"}&deltaMinutes=${sliderValue === 100 ? deltaMinutes : (100 - sliderValue).toString()}&deltaSeconds=${urlParams.has("sec") ? urlParams.get('sec') : "0"} &deltaFPS=-10`}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
+            <div onClick = {() => {setSliderValue(100); window.history.replaceState(null, null, window.location.pathname); setQueryString("")}}style={{backgroundColor : sliderValue === 100 ? "red" : "grey"}} className="top-right "> En Directo </div>
             <Slider
               value={sliderValue}
               onChange={handleSliderChange}
