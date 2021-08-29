@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import Slider from '@material-ui/core/Slider';
+import 'react-rangeslider/lib/index.css'
 import './ImageFeed.css';
 /** This class handles to post the live feed from the camera. */
-class ImageFeed extends Component {
-  render() {
+function ImageFeed() {
+  const [sliderValue, setSliderValue] = useState(100); 
+
+  const handleSliderChange = (event, newValue) => {
+    setSliderValue(newValue);
+  }
     return(
       <Col sm={7} className='image-wrapper d-flex pt-5'>
         <Container>
@@ -14,6 +20,11 @@ class ImageFeed extends Component {
             <div className='live-container'>
               <img src='https://mdbcdn.b-cdn.net/img/new/slides/041.jpg' className='rounded img-fluid shadow-4 border border-dark' alt='...' />
               <div className="top-right"> En Directo </div>
+              <Slider
+                value={sliderValue}
+                onChange={handleSliderChange}
+                color="secondary"
+              />
             </div>
           </Row>
           <Row>
@@ -22,6 +33,5 @@ class ImageFeed extends Component {
         </Container>
       </Col>
     );
-  }
 }
 export default ImageFeed;
