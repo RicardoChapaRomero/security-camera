@@ -24,7 +24,7 @@ function TabCameras () {
         </Row>
         <Row>
           <div className='live-container'>
-          <img src={`http://security-system-vision.ngrok.io/camara?deltaDays=${deltaDays}&deltaHours=${deltaHours}&deltaMinutes=${deltaMinutes}&deltaSeconds=${sliderValue === 100 ? deltaSeconds : (100 - sliderValue)} &deltaFPS=-10`}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
+          <img src={`http://security-system-vision.ngrok.io/camara?deltaDays=${deltaDays}&deltaHours=${deltaHours}&deltaMinutes=${sliderValue === 100 ? deltaMinutes : (100 - sliderValue)}&deltaSeconds=${deltaSeconds} &deltaFPS=-10`}  className='rounded img-fluid shadow-4 border border-dark' alt='...' />
             <div onClick = {() => {setSliderValue(100)}}style={{backgroundColor : sliderValue === 100 ? "red" : "grey"}} className="top-right "> En Directo </div>
             <Slider
               value={sliderValue}

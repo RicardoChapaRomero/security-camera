@@ -5,10 +5,10 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import { ChevronDown, ChevronUp } from "heroicons-react";
 import { useGetMainDashQuery } from '../../../services/dashboardData';
+import { Avatar } from '@material-ui/core';
 
 const millisecondsPerMinute = 60000;
 const minutesToAutoFetch = 1;
-import { Avatar } from '@material-ui/core';
 
 function MyVerticallyCenteredModal(props) {
   return (
@@ -24,10 +24,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          {"Azure ID: " + props.azure_id}
-        </p>
-        <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com"/>
+        <img src={`http://security-system-vision.ngrok.io/faces/${props.azure_id}.jpg`} alt="W3Schools.com"/>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -137,8 +134,8 @@ function UserTable() {
           "id": index,
           "azure_id": singleData.id_person,
           "name": singleData.name,
-          "registered_timestamp": singleData.registered_timestamp,
           "latest_timestamp": singleData.seen_on,
+          "image": `http://security-system-vision.ngrok.io/faces/${singleData.id_person}.jpg`
         });
       })
   

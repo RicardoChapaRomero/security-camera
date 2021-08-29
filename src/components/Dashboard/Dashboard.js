@@ -25,8 +25,8 @@ const minutesToAutoFetch = 1;
         </Modal.Title>
       </Modal.Header>
       <Modal.Body clas>
-        <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com"/>
-      </Modal.Body>
+       <img src={`http://security-system-vision.ngrok.io/faces/${props.azure_id}.jpg`} alt="W3Schools.com"/>     
+       </Modal.Body>
       <Modal.Footer>
       <Button onClick={props.onHide} variant="light">Close</Button>
         <Button onClick={() => {
