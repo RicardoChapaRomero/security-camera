@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-
+import './ImageFeed.css';
 /** This class handles to post the live feed from the camera. */
 class ImageFeed extends Component {
   render() {
@@ -11,8 +11,9 @@ class ImageFeed extends Component {
             <h2 className='text-center'>Live feed from camera</h2>
           </Row>
           <Row>
-            <div className='image-container'>
+            <div className='live-container'>
               <img src='https://mdbcdn.b-cdn.net/img/new/slides/041.jpg' className='rounded img-fluid shadow-4 border border-dark' alt='...' />
+              <div className="top-right"> En Directo </div>
             </div>
           </Row>
           <Row>
