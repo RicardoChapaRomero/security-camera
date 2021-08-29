@@ -6,6 +6,7 @@ import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import { ChevronDown, ChevronUp } from "heroicons-react";
 import { useGetMainDashQuery } from '../../../services/dashboardData';
 import { Avatar } from '@material-ui/core';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
 const millisecondsPerMinute = 60000;
 const minutesToAutoFetch = 1;
@@ -196,6 +197,7 @@ function UserTable() {
               <Row>
                 <div className='info-table-wrapper'>
                   <BootstrapTable keyField='id'
+                   pagination={ paginationFactory() } 
                    data={ rows } 
                    columns={ columns } 
                    selectRow = {selectRow} 

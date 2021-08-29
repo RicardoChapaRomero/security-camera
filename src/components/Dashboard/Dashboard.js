@@ -5,7 +5,6 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { ChevronDown, ChevronUp } from "heroicons-react";
 import { useGetTopDataQuery } from '../../services/record';
 
-
 const millisecondsPerMinute = 60000;
 const minutesToAutoFetch = 1;
 /** This class handles the latest data retrieved from the camera detections
